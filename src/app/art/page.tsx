@@ -11,7 +11,7 @@ export default function Home() {
 	const getForm = useCallback(async () => {
 		try {
 			const response = await axios.post('/api/forms', {
-				type: 'MOD',
+				type: 'ART',
 				page: page,
 			});
 			setData(response.data);
@@ -52,4 +52,3 @@ export default function Home() {
 		</>
 	);
 }
-

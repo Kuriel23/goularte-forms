@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model forms {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  v            Int      @map("__v")
+  createdAt    DateTime @db.Date
+  data         Json
+  formtype     String
+  id_          String   @unique(map: "id_1") @map("id")
+  updatedAt    DateTime @db.Date
+  userId       String
+  userUsername String
+}
