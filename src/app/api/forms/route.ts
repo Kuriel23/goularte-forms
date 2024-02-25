@@ -34,7 +34,6 @@ export async function POST(request: Request) {
 export async function DELETE(request: NextRequest) {
 	const searchParams = request.nextUrl.searchParams;
 	const id = searchParams.get('id');
-	console.log(searchParams)
 
 	if (!id)
 		return new NextResponse(JSON.stringify({ status: '404' }), {

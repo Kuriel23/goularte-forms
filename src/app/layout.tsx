@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 
 export const metadata: Metadata = {
 	title: 'Formulários do Goularte',
+	robots: 'noindex',
 };
 
 export default function RootLayout({

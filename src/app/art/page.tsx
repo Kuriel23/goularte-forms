@@ -1,5 +1,6 @@
 'use client';
 import FormBox from '@/components/FormBox';
+import NoForms from '@/components/NoForms';
 import axios from 'axios';
 import React, { useState, useCallback, useEffect } from 'react';
 
@@ -10,11 +11,11 @@ export default function Home() {
 
 	const getForm = useCallback(async () => {
 		try {
-			const response = await axios.post('/api/forms', {
+			const { data } = await axios.post('/api/forms', {
 				type: 'ART',
 				page: page,
 			});
-			setData(response.data);
+			setData(data);
 		} catch (error) {
 			console.error('Erro enviando solicitação:', error);
 		}
@@ -39,16 +40,14 @@ export default function Home() {
 		}
 	}, [page, pageChanged, getForm]);
 
-	return (
-		<>
-			{data && data.length > 0 ? (
-				<FormBox
-					dataArray={data}
-					page={page}
-					onPreviousPage={handlePreviousPage}
-					onNextPage={handleNextPage}
-				/>
-			) : null}
-		</>
+	return data.length > 0 && data[0] !== null ? (
+		<FormBox
+			dataArray={data}
+			page={page}
+			onPreviousPage={handlePreviousPage}
+			onNextPage={handleNextPage}
+		/>
+	) : (
+		<NoForms />
 	);
 }

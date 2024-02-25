@@ -17,4 +17,5 @@ model forms {
   updatedAt    DateTime @db.Date
   userId       String
   userUsername String
+  guild        Int
 }
