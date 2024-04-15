@@ -56,7 +56,10 @@ export default function FormBox({
 				<div className="flex gap-4 mx-auto items-center w-fit justify-center p-2 text-2xl whitespace-nowrap rounded-3xl bg-zinc-900">
 					<img
 						alt="Avatar"
-						src={user.avatar.link}
+						src={
+							user.avatar?.link ||
+							'https://cdn.discordapp.com/embed/avatars/0.png'
+						}
 						className="aspect-square w-12 rounded-full"
 					/>
 					<div className="flex flex-col">
