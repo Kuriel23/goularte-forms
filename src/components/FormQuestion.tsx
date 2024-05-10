@@ -36,32 +36,11 @@ export default function FormQuestion({
 		);
 	}
 
-	const isLink =
-		response?.includes('http://') || response?.includes('https://');
-	const isPrintQuestion = question === 'print';
-	const linkMatch = response?.match(/https?:\/\/[^\s]+/);
-	const extractedLink = linkMatch ? linkMatch[0] : null;
-	const responseWithoutLink = response?.replace(extractedLink as string, '');
-
 	return (
 		<div className="mt-3">
 			<h2 className="text-2xl max-md:max-w-full">{formattedQuestion}</h2>
 			<p className="justify-center px-8 py-7 mt-3 text-lg font-medium rounded-2xl bg-zinc-900 max-md:px-5 max-md:max-w-full">
-				{isLink && isPrintQuestion ? (
-					<>
-						{responseWithoutLink}
-						<a
-							href={extractedLink || '#'}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-blue-500 hover:text-blue-700" // Adiciona classes para cor e hover
-						>
-							{extractedLink}
-						</a>
-					</>
-				) : (
-					response
-				)}
+				{response}
 			</p>
 		</div>
 	);
