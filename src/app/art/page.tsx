@@ -1,8 +1,8 @@
-'use client';
-import FormBox from '@/components/FormBox';
-import NoForms from '@/components/NoForms';
-import axios from 'axios';
-import React, { useState, useCallback, useEffect } from 'react';
+"use client";
+import FormBox from "@/components/FormBox";
+import NoForms from "@/components/NoForms";
+import axios from "axios";
+import React, { useState, useCallback, useEffect } from "react";
 
 export default function Home() {
 	const [page, setPage] = useState(1);
@@ -11,13 +11,13 @@ export default function Home() {
 
 	const getForm = useCallback(async () => {
 		try {
-			const { data } = await axios.post('/api/forms', {
-				type: 'ART',
+			const { data } = await axios.post("/api/forms", {
+				type: "ART",
 				page: page,
 			});
 			setData(data);
 		} catch (error) {
-			console.error('Erro enviando solicitação:', error);
+			console.error("Erro enviando solicitação:", error);
 		}
 	}, [page]);
 
@@ -33,6 +33,7 @@ export default function Home() {
 		setPageChanged(true);
 	};
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		if (pageChanged) {
 			getForm();

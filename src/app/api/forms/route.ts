@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client';
-import { NextRequest, NextResponse } from 'next/server';
+import { PrismaClient } from "@prisma/client";
+import { type NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
 	const formData = await request.json();
@@ -24,24 +24,24 @@ export async function POST(request: Request) {
 	return new NextResponse(JSON.stringify([form, { pagesTotal }]), {
 		status: 200,
 		headers: {
-			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Methods': 'GET, POST',
-			'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "GET, POST",
+			"Access-Control-Allow-Headers": "Content-Type, Authorization",
 		},
 	});
 }
 
 export async function DELETE(request: NextRequest) {
 	const searchParams = request.nextUrl.searchParams;
-	const id = searchParams.get('id');
+	const id = searchParams.get("id");
 
 	if (!id)
-		return new NextResponse(JSON.stringify({ status: '404' }), {
+		return new NextResponse(JSON.stringify({ status: "404" }), {
 			status: 404,
 			headers: {
-				'Access-Control-Allow-Origin': '*',
-				'Access-Control-Allow-Methods': 'DELETE',
-				'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Methods": "DELETE",
+				"Access-Control-Allow-Headers": "Content-Type, Authorization",
 			},
 		});
 
@@ -51,12 +51,12 @@ export async function DELETE(request: NextRequest) {
 		},
 	});
 
-	return new NextResponse(JSON.stringify({ status: '200' }), {
+	return new NextResponse(JSON.stringify({ status: "200" }), {
 		status: 200,
 		headers: {
-			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Methods': 'DELETE',
-			'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "DELETE",
+			"Access-Control-Allow-Headers": "Content-Type, Authorization",
 		},
 	});
 }

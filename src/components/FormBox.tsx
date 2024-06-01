@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
-import FormQuestion from './FormQuestion';
+import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
+import FormQuestion from "./FormQuestion";
 
 interface FormBoxProps {
 	dataArray: any[];
-	page: Number;
+	page: number;
 	onPreviousPage: () => void;
 	onNextPage: () => void;
 }
@@ -29,36 +29,36 @@ export default function FormBox({
 	const getUser = useCallback(async () => {
 		try {
 			const response = await axios.get(
-				'https://discordlookup.mesavirep.xyz/v1/user/' +
-					dataArray[0].userId,
+				`https://discordlookup.mesavirep.xyz/v1/user/${dataArray[0].userId}`,
 			);
 			setUser(response.data);
 		} catch (error) {
-			console.error('Erro enviando solicitação:', error);
+			console.error("Erro enviando solicitação:", error);
 		}
 	}, [dataArray]);
 
 	const deleteForm = useCallback(async () => {
 		try {
-			await axios.delete('/api/forms?id=' + dataArray[0].id);
+			await axios.delete(`/api/forms?id=${dataArray[0].id}`);
 		} catch (error) {
-			console.error('Erro enviando solicitação:', error);
+			console.error("Erro enviando solicitação:", error);
 		}
 	}, [dataArray]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		getUser();
 	}, [dataArray, getUser]);
 
 	return (
 		<main className="flex flex-col p-7 m-4 font-bold rounded-xl bg-zinc-800 text-neutral-400">
-			{user && (
+			{user ? (
 				<div className="flex gap-4 mx-auto items-center w-fit justify-center p-2 text-2xl whitespace-nowrap rounded-3xl bg-zinc-900">
 					<img
 						alt="Avatar"
 						src={
 							user.avatar?.link ||
-							'https://cdn.discordapp.com/embed/avatars/0.png'
+							"https://cdn.discordapp.com/embed/avatars/0.png"
 						}
 						className="aspect-square w-12 rounded-full"
 					/>
@@ -67,19 +67,19 @@ export default function FormBox({
 						<p className="text-sm">{dataArray[0].userId}</p>
 					</div>
 				</div>
+			) : (
+				<div className="flex gap-4 mx-auto items-center w-fit justify-center p-2 text-2xl whitespace-nowrap rounded-3xl bg-zinc-900">
+					<p className="text-sm">{dataArray[0].userId}</p>
+				</div>
 			)}
 			{Object.entries(dataArray[0].data).map(([key, value]) => (
-				<FormQuestion
-					key={key}
-					question={key}
-					response={value as string}
-				/>
+				<FormQuestion key={key} question={key} response={value as string} />
 			))}
 			<div className="flex gap-5 justify-between items-center p-4 mt-5 w-full whitespace-nowrap rounded-3xl bg-zinc-900 max-md:flex-wrap max-md:pr-5 max-md:max-w-full">
 				<p className="my-auto text-2xl">
 					{dataArray[0].guild === 0
-						? 'Servidor do Goularte'
-						: 'Subsolo do Goularte'}
+						? "Servidor do Goularte"
+						: "Subsolo do Goularte"}
 				</p>
 				<img
 					src="/icons/delete.svg"
@@ -87,7 +87,7 @@ export default function FormBox({
 					className="my-auto aspect-square w-12 cursor-pointer"
 					onClick={() => {
 						deleteForm();
-						if ((dataArray[1].pagesTotal as Number) <= page)
+						if ((dataArray[1].pagesTotal as number) <= page)
 							return onPreviousPage();
 						return onNextPage();
 					}}
@@ -98,8 +98,7 @@ export default function FormBox({
 						src="/icons/arrow_left.svg"
 						onClick={onPreviousPage}
 						className={
-							'aspect-square w-12 cursor-pointer ' +
-							(page === 1 ? 'hidden' : '')
+							`aspect-square w-12 cursor-pointer ${page === 1 ? "hidden" : ""}`
 						}
 					/>
 					<p>
@@ -110,10 +109,7 @@ export default function FormBox({
 						src="/icons/arrow_right.svg"
 						onClick={onNextPage}
 						className={
-							'aspect-square w-12 cursor-pointer ' +
-							((dataArray[1].pagesTotal as Number) <= page
-								? 'hidden'
-								: '')
+							`aspect-square w-12 cursor-pointer ${(dataArray[1].pagesTotal as Number) <= page ? "hidden" : ""}`
 						}
 					/>
 				</div>
