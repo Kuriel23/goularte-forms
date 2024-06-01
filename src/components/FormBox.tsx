@@ -81,6 +81,7 @@ export default function FormBox({
 						? "Servidor do Goularte"
 						: "Subsolo do Goularte"}
 				</p>
+				{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 				<img
 					src="/icons/delete.svg"
 					alt="Delete"
@@ -93,24 +94,26 @@ export default function FormBox({
 					}}
 				/>
 				<div className="flex items-center justify-center gap-4 text-2xl">
+					{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 					<img
 						alt="Arrow Left"
 						src="/icons/arrow_left.svg"
 						onClick={onPreviousPage}
-						className={
-							`aspect-square w-12 cursor-pointer ${page === 1 ? "hidden" : ""}`
-						}
+						className={`aspect-square w-12 cursor-pointer ${
+							page === 1 ? "hidden" : ""
+						}`}
 					/>
 					<p>
 						{page}/{dataArray[1].pagesTotal}
 					</p>
+					{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
 					<img
 						alt="Arrow Right"
 						src="/icons/arrow_right.svg"
 						onClick={onNextPage}
-						className={
-							`aspect-square w-12 cursor-pointer ${(dataArray[1].pagesTotal as Number) <= page ? "hidden" : ""}`
-						}
+						className={`aspect-square w-12 cursor-pointer ${
+							(dataArray[1].pagesTotal as number) <= page ? "hidden" : ""
+						}`}
 					/>
 				</div>
 			</div>
